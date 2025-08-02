@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ultimate AI Tools Directory</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+    }
+    
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 10px;
+      font-size: 2.5em;
+      font-weight: 700;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 30px;
+      font-size: 1.1em;
+    }
+    
+    .search-container {
+      margin-bottom: 30px;
+      position: relative;
+    }
+    
+    #searchInput {
+      width: 100%;
+      padding: 15px 50px 15px 20px;
+      border: 2px solid #e0e0e0;
+      border-radius: 50px;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.9);
+    }
+    
+    #searchInput:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+    }
+    
+    .search-icon {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #999;
+      font-size: 18px;
+    }
+    
+    .category-filter {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 30px;
+      justify-content: center;
+    }
+    
+    .filter-btn {
+      padding: 10px 20px;
+      border: 2px solid #667eea;
+      background: transparent;
+      color: #667eea;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+    
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: #667eea;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    }
+    
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+    
+    .tool-card {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      border: 1px solid #f0f0f0;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .tool-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+    }
+    
+    .tool-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+    
+    .tool-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .tool-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      margin-right: 15px;
+      font-size: 18px;
+    }
+    
+    .tool-name {
+      font-size: 1.3em;
+      font-weight: 700;
+      color: #2c3e50;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .tool-name:hover {
+      color: #667eea;
+    }
+    
+    .tool-description {
+      color: #666;
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+    
+    .tool-specialty {
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-size: 0.9em;
+      font-weight: 500;
+      display: inline-block;
+      margin-bottom: 15px;
+    }
+    
+    .tool-category {
+      background: rgba(102, 126, 234, 0.1);
+      color: #667eea;
+      padding: 5px 12px;
+      border-radius: 15px;
+      font-size: 0.8em;
+      font-weight: 500;
+      display: inline-block;
+    }
+    
+    .pricing {
+      margin-top: 10px;
+      font-size: 0.9em;
+      color: #888;
+    }
+    
+    
+    .ai-info-section {
+      margin-bottom: 40px;
+    }
+    
+    .info-card {
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+      border-radius: 15px;
+      padding: 25px;
+      margin-bottom: 30px;
+      border: 1px solid rgba(102, 126, 234, 0.2);
+    }
+    
+    .info-header h2 {
+      color: #2c3e50;
+      margin-bottom: 15px;
+      font-size: 1.8em;
+    }
+    
+    .info-card p {
+      color: #555;
+      line-height: 1.7;
+      font-size: 1.1em;
+    }
+    
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    
+    .info-item {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    
+    .info-item:hover {
+      transform: translateY(-3px);
+    }
+    
+    .info-icon {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      display: block;
+    }
+    
+    .info-item h3 {
+      color: #2c3e50;
+      margin-bottom: 10px;
+      font-size: 1.2em;
+    }
+    
+    .info-item p {
+      color: #666;
+      font-size: 0.95em;
+      line-height: 1.5;
+    }
+    
+    .ai-benefits {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .ai-benefits h2 {
+      color: #2c3e50;
+      margin-bottom: 25px;
+      text-align: center;
+      font-size: 1.8em;
+    }
+    
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    
+    .benefit-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      padding: 15px;
+      background: rgba(102, 126, 234, 0.05);
+      border-radius: 10px;
+      transition: background 0.3s ease;
+    }
+    
+    .benefit-item:hover {
+      background: rgba(102, 126, 234, 0.1);
+    }
+    
+    .benefit-icon {
+      font-size: 1.5em;
+      color: #667eea;
+      flex-shrink: 0;
+    }
+    
+    .benefit-item h4 {
+      color: #2c3e50;
+      margin-bottom: 5px;
+      font-size: 1.1em;
+    }
+    
+    .benefit-item p {
+      color: #666;
+      font-size: 0.95em;
+      line-height: 1.5;
+    }
+    
+    .ai-ethics {
+      background: linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 87, 34, 0.1));
+      border-radius: 15px;
+      padding: 30px;
+      margin-bottom: 30px;
+      border: 1px solid rgba(255, 193, 7, 0.3);
+    }
+    
+    .ai-ethics h2 {
+      color: #2c3e50;
+      margin-bottom: 20px;
+      font-size: 1.8em;
+    }
+    
+    .ethics-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    
+    .ethics-item {
+      background: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      border-left: 4px solid #ff9800;
+    }
+    
+    .ethics-item h4 {
+      color: #2c3e50;
+      margin-bottom: 10px;
+      font-size: 1.1em;
+    }
+    
+    .ethics-item p {
+      color: #555;
+      font-size: 0.95em;
+      line-height: 1.6;
+    }
+    
+    .future-ai {
+      background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(139, 195, 74, 0.1));
+      border-radius: 15px;
+      padding: 30px;
+      margin-bottom: 40px;
+      border: 1px solid rgba(76, 175, 80, 0.3);
+    }
+    
+    .future-ai h2 {
+      color: #2c3e50;
+      margin-bottom: 15px;
+      font-size: 1.8em;
+    }
+    
+    .future-ai p {
+      color: #555;
+      margin-bottom: 20px;
+      font-size: 1.1em;
+      line-height: 1.7;
+    }
+    
+    .future-list {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .future-list li {
+      background: rgba(255, 255, 255, 0.8);
+      margin-bottom: 10px;
+      padding: 15px;
+      border-radius: 8px;
+      border-left: 4px solid #4caf50;
+      color: #555;
+      line-height: 1.6;
+    }
+    
+    .future-list li strong {
+      color: #2c3e50;
+    }
+      display: flex;
+      justify-content: space-around;
+      margin-top: 30px;
+      padding: 20px;
+      background: rgba(102, 126, 234, 0.1);
+      border-radius: 15px;
+    }
+    
+    .stat {
+      text-align: center;
+    }
+    
+    .stat-number {
+      font-size: 2em;
+      font-weight: bold;
+      color: #667eea;
+    }
+    
+    .stat-label {
+      color: #666;
+      font-size: 0.9em;
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px;
+        margin: 10px;
+      }
+      
+      h1 {
+        font-size: 2em;
+      }
+      
+      .tools-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .category-filter {
+        justify-content: center;
+      }
+      
+      .filter-btn {
+        font-size: 14px;
+        padding: 8px 16px;
+      }
+      
+      .stats {
+        flex-direction: column;
+        gap: 15px;
+      }
+    }
+    
+    .hidden {
+      display: none;
+    }
+    
+    .fade-in {
+      animation: fadeIn 0.5s ease-in;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+      <div class="container">
+    <h1>🚀 Ultimate AI Tools Directory</h1>
+    <p class="subtitle">Discover the best AI tools to supercharge your productivity and creativity</p>
+    
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Search AI tools...">
+      <span class="search-icon">🔍</span>
+    </div>
+    
+    <div class="category-filter">
+      <button class="filter-btn active" data-category="all">All Tools</button>
+      <button class="filter-btn" data-category="text">Text & Writing</button>
+      <button class="filter-btn" data-category="image">Image & Art</button>
+      <button class="filter-btn" data-category="voice">Voice & Audio</button>
+      <button class="filter-btn" data-category="code">Coding</button>
+      <button class="filter-btn" data-category="video">Video</button>
+      <button class="filter-btn" data-category="research">Research</button>
+      <button class="filter-btn" data-category="productivity">Productivity</button>
+      <button class="filter-btn" data-category="design">Design</button>
+      <button class="filter-btn" data-category="data">Data & Analytics</button>
+      <button class="filter-btn" data-category="business">Business</button>
+      <button class="filter-btn" data-category="education">Education</button>
+    </div>
+    
+    <div class="tools-grid" id="toolsGrid">
+      <!-- Text & Writing Tools -->
+      <div class="tool-card" data-category="text">
+        <div class="tool-header">
+          <div class="tool-icon">💬</div>
+          <a href="https://chat.openai.com" target="_blank" class="tool-name">ChatGPT</a>
+        </div>
+        <div class="tool-description">Advanced AI assistant powered by GPT models for natural conversations, creative writing, coding assistance, and complex problem-solving.</div>
+        <div class="tool-specialty">Conversational AI</div>
+        <div class="tool-category">text</div>
+        <div class="capabilities">
+          <h4>Key Capabilities:</h4>
+          <ul>
+            <li>📝 Creative writing (stories, poems, scripts)</li>
+            <li>💻 Code generation and debugging</li>
+            <li>📊 Data analysis and explanations</li>
+            <li>🌐 Language translation (100+ languages)</li>
+            <li>🎓 Educational tutoring and explanations</li>
+            <li>💼 Business writing and emails</li>
+            <li>🔍 Research assistance and summarization</li>
+          </ul>
+        </div>
+        <div class="pricing">Free tier available, Plus $20/month, Team $25/user/month</div>
+      </div>
+      
+      <div class="tool-card" data-category="text">
+        <div class="tool-header">
+          <div class="tool-icon">✍️</div>
+          <a href="https://claude.ai" target="_blank" class="tool-name">Claude</a>
+        </div>
+        <div class="tool-description">Anthropic's constitutional AI focused on helpful, harmless, and honest interactions with advanced reasoning capabilities.</div>
+        <div class="tool-specialty">Ethical AI Assistant</div>
+        <div class="tool-category">text</div>
+        <div class="capabilities">
+          <h4>Key Capabilities:</h4>
+          <ul>
+            <li>📖 Long document analysis (up to 200K tokens)</li>
+            <li>🧠 Complex reasoning and analysis</li>
+            <li>💻 Advanced coding assistance</li>
+            <li>📝 Academic and technical writing</li>
+            <li>🔍 Research and fact-checking</li>
+            <li>🎯 Structured data processing</li>
+            <li>⚖️ Ethical decision-making guidance</li>
+          </ul>
+        </div>
+        <div class="pricing">Free tier available, Pro $20/month, Team $25/user/month</div>
+      </div>
+      
+      <div class="tool-card" data-category="text">
+        <div class="tool-header">
+          <div class="tool-icon">📝</div>
+          <a href="https://jasper.ai" target="_blank" class="tool-name">Jasper</a>
+        </div>
+        <div class="tool-description">Enterprise-grade AI content platform specifically designed for marketing teams and content creators at scale.</div>
+        <div class="tool-specialty">Marketing Content</div>
+        <div class="tool-category">text</div>
+        <div class="capabilities">
+          <h4>Key Capabilities:</h4>
+          <ul>
+            <li>📱 Social media post generation</li>
+            <li>📧 Email marketing campaigns</li>
+            <li>🌐 Blog articles and SEO content</li>
+            <li>📺 Ad copy for multiple platforms</li>
+            <li>🎨 Brand voice customization</li>
+            <li>📊 Content performance analytics</li>
+            <li>👥 Team collaboration features</li>
+          </ul>
+        </div>
+        <div class="pricing">Creator $49/month, Teams $125/month, Business custom pricing</div>
+      </div>
+      
+      <!-- Image & Art Tools -->
+      <div class="tool-card" data-category="image">
+        <div class="tool-header">
+          <div class="tool-icon">🎨</div>
+          <a href="https://www.midjourney.com" target="_blank" class="tool-name">Midjourney</a>
+        </div>
+        <div class="tool-description">AI art generator creating stunning, high-quality images from text descriptions with artistic flair.</div>
+        <div class="tool-specialty">High-quality stylized images</div>
+        <div class="tool-category">image</div>
+        <div class="pricing">Starting at $10/month</div>
+      </div>
+      
+      <div class="tool-card" data-category="image">
+        <div class="tool-header">
+          <div class="tool-icon">🖼️</div>
+          <a href="https://leonardo.ai" target="_blank" class="tool-name">Leonardo.Ai</a>
+        </div>
+        <div class="tool-description">AI image generator specialized in game assets, concept art, and consistent character creation.</div>
+        <div class="tool-specialty">Game assets & concept art</div>
+        <div class="tool-category">image</div>
+        <div class="pricing">Free tier available, paid plans from $12/month</div>
+      </div>
+      
+      <div class="tool-card" data-category="image">
+        <div class="tool-header">
+          <div class="tool-icon">🎭</div>
+          <a href="https://stability.ai" target="_blank" class="tool-name">Stable Diffusion</a>
+        </div>
+        <div class="tool-description">Open-source AI image generator offering high-quality results with full control and customization.</div>
+        <div class="tool-specialty">Open-source image generation</div>
+        <div class="tool-category">image</div>
+        <div class="pricing">Free (open-source), cloud services vary</div>
+      </div>
+      
+      <!-- Voice & Audio Tools -->
+      <div class="tool-card" data-category="voice">
+        <div class="tool-header">
+          <div class="tool-icon">🎤</div>
+          <a href="https://www.elevenlabs.io" target="_blank" class="tool-name">ElevenLabs</a>
+        </div>
+        <div class="tool-description">Advanced AI voice synthesis and cloning technology for realistic speech generation.</div>
+        <div class="tool-specialty">Realistic AI voice cloning</div>
+        <div class="tool-category">voice</div>
+        <div class="pricing">Free tier available, paid plans from $5/month</div>
+      </div>
+      
+      <div class="tool-card" data-category="voice">
+        <div class="tool-header">
+          <div class="tool-icon">🎵</div>
+          <a href="https://mubert.com" target="_blank" class="tool-name">Mubert</a>
+        </div>
+        <div class="tool-description">AI music generator creating royalty-free music for content creators and businesses.</div>
+        <div class="tool-specialty">AI-generated music</div>
+        <div class="tool-category">voice</div>
+        <div class="pricing">Free tier available, paid plans from $14/month</div>
+      </div>
+      
+      <!-- Coding Tools -->
+      <div class="tool-card" data-category="code">
+        <div class="tool-header">
+          <div class="tool-icon">💻</div>
+          <a href="https://github.com/features/copilot" target="_blank" class="tool-name">GitHub Copilot</a>
+        </div>
+        <div class="tool-description">AI pair programmer that helps write code faster with intelligent suggestions and completions.</div>
+        <div class="tool-specialty">Code completion & assistance</div>
+        <div class="tool-category">code</div>
+        <div class="pricing">$10/month for individuals</div>
+      </div>
+      
+      <div class="tool-card" data-category="code">
+        <div class="tool-header">
+          <div class="tool-icon">🔧</div>
+          <a href="https://replit.com" target="_blank" class="tool-name">Replit Ghostwriter</a>
+        </div>
+        <div class="tool-description">AI coding assistant integrated into the Replit IDE for code generation and debugging.</div>
+        <div class="tool-specialty">Integrated coding environment</div>
+        <div class="tool-category">code</div>
+        <div class="pricing">Free tier available, paid plans from $7/month</div>
+      </div>
+      
+      <!-- Video Tools -->
+      <div class="tool-card" data-category="video">
+        <div class="tool-header">
+          <div class="tool-icon">🎬</div>
+          <a href="https://runwayml.com" target="_blank" class="tool-name">Runway ML</a>
+        </div>
+        <div class="tool-description">AI-powered creative suite for video editing, generation, and visual effects.</div>
+        <div class="tool-specialty">AI video generation & editing</div>
+        <div class="tool-category">video</div>
+        <div class="pricing">Free tier available, paid plans from $15/month</div>
+      </div>
+      
+      <div class="tool-card" data-category="video">
+        <div class="tool-header">
+          <div class="tool-icon">📹</div>
+          <a href="https://synthesia.io" target="_blank" class="tool-name">Synthesia</a>
+        </div>
+        <div class="tool-description">AI video platform creating professional videos with AI avatars and voices.</div>
+        <div class="tool-specialty">AI avatar videos</div>
+        <div class="tool-category">video</div>
+        <div class="pricing">Starting at $30/month</div>
+      </div>
+      
+      <!-- Research Tools -->
+      <div class="tool-card" data-category="research">
+        <div class="tool-header">
+          <div class="tool-icon">🔍</div>
+          <a href="https://www.perplexity.ai" target="_blank" class="tool-name">Perplexity AI</a>
+        </div>
+        <div class="tool-description">AI-powered search engine providing accurate, sourced answers with real-time web information.</div>
+        <div class="tool-specialty">Web-powered factual answers</div>
+        <div class="tool-category">research</div>
+        <div class="pricing">Free tier available, Pro $20/month</div>
+      </div>
+      
+      <div class="tool-card" data-category="research">
+        <div class="tool-header">
+          <div class="tool-icon">📊</div>
+          <a href="https://elicit.org" target="_blank" class="tool-name">Elicit</a>
+        </div>
+        <div class="tool-description">AI research assistant that helps analyze research papers and find relevant academic literature.</div>
+        <div class="tool-specialty">Academic research assistance</div>
+        <div class="tool-category">research</div>
+        <div class="pricing">Free tier available, paid plans from $10/month</div>
+      </div>
+      
+      <div class="tool-card" data-category="text">
+        <div class="tool-header">
+          <div class="tool-icon">🧠</div>
+          <a href="https://notion.so/product/ai" target="_blank" class="tool-name">Notion AI</a>
+        </div>
+        <div class="tool-description">AI writing assistant integrated into Notion workspace for enhanced productivity and content creation.</div>
+        <div class="tool-specialty">Workspace integration</div>
+        <div class="tool-category">text</div>
+        <div class="pricing">$10/month add-on to Notion plans</div>
+      </div>
+
+      <!-- More Text & Writing Tools -->
+      <div class="tool-card" data-category="text">
+        <div class="tool-header">
+          <div class="tool-icon">📚</div>
+          <a href="https://writesonic.com" target="_blank" class="tool-name">Writesonic</a>
+        </div>
+        <div class="tool-description">AI writing platform for creating blog posts, ads, emails, and website copy with built-in SEO optimization.</div>
+        <div class="tool-specialty">SEO-optimized content</div>
+        <div class="tool-category">text</div>
+        <div class="pricing">Free tier available, paid plans from $16/month</div>
+      </div>
+
+      <div class="tool-card" data-category="text">
+        <div class="tool-header">
+          <div class="tool-icon">📄</div>
+          <a href="https://quillbot.com" target="_blank" class="tool-name">QuillBot</a>
+        </div>
+        <div class="tool-description">AI paraphrasing and grammar checker tool for improving writing quality and avoiding plagiarism.</div>
+        <div class="tool-specialty">Paraphrasing & Grammar</div>
+        <div class="tool-category">text</div>
+        <div class="pricing">Free tier available, Premium $8.33/month</div>
+      </div>
+
+      <div class="tool-card" data-category="text">
+        <div class="tool-header">
+          <div class="tool-icon">💌</div>
+          <a href="https://copy.ai" target="_blank" class="tool-name">Copy.ai</a>
+        </div>
+        <div class="tool-description">AI copywriting tool for creating marketing content, social media posts, and sales copy.</div>
+        <div class="tool-specialty">Marketing copy generation</div>
+        <div class="tool-category">text</div>
+        <div class="pricing">Free tier available, paid plans from $49/month</div>
+      </div>
+
+      <!-- Additional Image & Art Tools -->
+      <div class="tool-card" data-category="image">
+        <div class="tool-header">
+          <div class="tool-icon">🌈</div>
+          <a href="https://www.canva.com/ai-image-generator/" target="_blank" class="tool-name">Canva AI</a>
+        </div>
+        <div class="tool-description">AI-powered design platform with image generation, background removal, and design automation.</div>
+        <div class="tool-specialty">Design automation</div>
+        <div class="tool-category">image</div>
+        <div class="pricing">Free tier available, Pro $15/month</div>
+      </div>
+
+      <div class="tool-card" data-category="image">
+        <div class="tool-header">
+          <div class="tool-icon">🖌️</div>
+          <a href="https://firefly.adobe.com" target="_blank" class="tool-name">Adobe Firefly</a>
+        </div>
+        <div class="tool-description">Adobe's AI image generator integrated into Creative Cloud with text-to-image and generative fill.</div>
+        <div class="tool-specialty">Creative Cloud integration</div>
+        <div class="tool-category">image</div>
+        <div class="pricing">Included with Creative Cloud, standalone plans available</div>
+      </div>
+
+      <div class="tool-card" data-category="image">
+        <div class="tool-header">
+          <div class="tool-icon">🎪</div>
+          <a href="https://www.remove.bg" target="_blank" class="tool-name">Remove.bg</a>
+        </div>
+        <div class="tool-description">AI-powered background removal tool that automatically removes backgrounds from images.</div>
+        <div class="tool-specialty">Background removal</div>
+        <div class="tool-category">image</div>
+        <div class="pricing">Free tier available, paid plans from $9/month</div>
+      </div>
+
+      <div class="tool-card" data-category="image">
+        <div class="tool-header">
+          <div class="tool-icon">📸</div>
+          <a href="https://www.upscale.media" target="_blank" class="tool-name">Upscale.media</a>
+        </div>
+        <div class="tool-description">AI image upscaler that enhances image resolution and quality using advanced algorithms.</div>
+        <div class="tool-specialty">Image enhancement</div>
+        <div class="tool-category">image</div>
+        <div class="pricing">Free tier available, paid plans from $19/month</div>
+      </div>
+
+      <!-- More Voice & Audio Tools -->
+      <div class="tool-card" data-category="voice">
+        <div class="tool-header">
+          <div class="tool-icon">🎙️</div>
+          <a href="https://otter.ai" target="_blank" class="tool-name">Otter.ai</a>
+        </div>
+        <div class="tool-description">AI-powered transcription service that converts speech to text in real-time with meeting notes.</div>
+        <div class="tool-specialty">Speech-to-text transcription</div>
+        <div class="tool-category">voice</div>
+        <div class="pricing">Free tier available, paid plans from $10/month</div>
+      </div>
+
+      <div class="tool-card" data-category="voice">
+        <div class="tool-header">
+          <div class="tool-icon">🔊</div>
+          <a href="https://speechify.com" target="_blank" class="tool-name">Speechify</a>
+        </div>
+        <div class="tool-description">AI text-to-speech tool that converts written content into natural-sounding audio.</div>
+        <div class="tool-specialty">Text-to-speech conversion</div>
+        <div class="tool-category">voice</div>
+        <div class="pricing">Free tier available, Premium $19/month</div>
+      </div>
+
+      <div class="tool-card" data-category="voice">
+        <div class="tool-header">
+          <div class="tool-icon">🎼</div>
+          <a href="https://www.aiva.ai" target="_blank" class="tool-name">AIVA</a>
+        </div>
+        <div class="tool-description">AI composer that creates original music for films, games, and other creative projects.</div>
+        <div class="tool-specialty">AI music composition</div>
+        <div class="tool-category">voice</div>
+        <div class="pricing">Free tier available, paid plans from $11/month</div>
+      </div>
+
+      <!-- Additional Coding Tools -->
+      <div class="tool-card" data-category="code">
+        <div class="tool-header">
+          <div class="tool-icon">🤖</div>
+          <a href="https://codeium.com" target="_blank" class="tool-name">Codeium</a>
+        </div>
+        <div class="tool-description">Free AI code completion tool supporting 70+ programming languages with IDE integrations.</div>
+        <div class="tool-specialty">Free code completion</div>
+        <div class="tool-category">code</div>
+        <div class="pricing">Free for individuals, Team plans available</div>
+      </div>
+
+      <div class="tool-card" data-category="code">
+        <div class="tool-header">
+          <div class="tool-icon">⚡</div>
+          <a href="https://www.tabnine.com" target="_blank" class="tool-name">Tabnine</a>
+        </div>
+        <div class="tool-description">AI code assistant that provides intelligent code completions based on your codebase patterns.</div>
+        <div class="tool-specialty">Context-aware coding</div>
+        <div class="tool-category">code</div>
+        <div class="pricing">Free tier available, Pro $12/month</div>
+      </div>
+
+      <div class="tool-card" data-category="code">
+        <div class="tool-header">
+          <div class="tool-icon">🔬</div>
+          <a href="https://www.cursor.sh" target="_blank" class="tool-name">Cursor</a>
+        </div>
+        <div class="tool-description">AI-first code editor built for pair programming with AI, offering intelligent code generation.</div>
+        <div class="tool-specialty">AI-first code editor</div>
+        <div class="tool-category">code</div>
+        <div class="pricing">Free tier available, Pro $20/month</div>
+      </div>
+
+      <!-- More Video Tools -->
+      <div class="tool-card" data-category="video">
+        <div class="tool-header">
+          <div class="tool-icon">🎞️</div>
+          <a href="https://www.descript.com" target="_blank" class="tool-name">Descript</a>
+        </div>
+        <div class="tool-description">AI-powered video and podcast editor with transcription, voice cloning, and text-based editing.</div>
+        <div class="tool-specialty">Text-based video editing</div>
+        <div class="tool-category">video</div>
+        <div class="pricing">Free tier available, paid plans from $12/month</div>
+      </div>
+
+      <div class="tool-card" data-category="video">
+        <div class="tool-header">
+          <div class="tool-icon">🌟</div>
+          <a href="https://www.loom.com" target="_blank" class="tool-name">Loom AI</a>
+        </div>
+        <div class="tool-description">Screen recording tool with AI-powered features like auto-generated titles and summaries.</div>
+        <div class="tool-specialty">AI-enhanced screen recording</div>
+        <div class="tool-category">video</div>
+        <div class="pricing">Free tier available, paid plans from $5/month</div>
+      </div>
+
+      <div class="tool-card" data-category="video">
+        <div class="tool-header">
+          <div class="tool-icon">🎨</div>
+          <a href="https://pictory.ai" target="_blank" class="tool-name">Pictory</a>
+        </div>
+        <div class="tool-description">AI video creation platform that transforms scripts and blog posts into engaging videos.</div>
+        <div class="tool-specialty">Script-to-video generation</div>
+        <div class="tool-category">video</div>
+        <div class="pricing">Starting at $19/month</div>
+      </div>
+
+      <!-- Additional Research Tools -->
+      <div class="tool-card" data-category="research">
+        <div class="tool-header">
+          <div class="tool-icon">🔬</div>
+          <a href="https://www.semanticscholar.org" target="_blank" class="tool-name">Semantic Scholar</a>
+        </div>
+        <div class="tool-description">AI-powered academic search engine that helps discover and understand scientific literature.</div>
+        <div class="tool-specialty">Academic paper discovery</div>
+        <div class="tool-category">research</div>
+        <div class="pricing">Free</div>
+      </div>
+
+      <div class="tool-card" data-category="research">
+        <div class="tool-header">
+          <div class="tool-icon">📖</div>
+          <a href="https://www.consensus.app" target="_blank" class="tool-name">Consensus</a>
+        </div>
+        <div class="tool-description">AI research engine that finds and summarizes scientific research to answer questions.</div>
+        <div class="tool-specialty">Scientific research summaries</div>
+        <div class="tool-category">research</div>
+        <div class="pricing">Free tier available, paid plans from $9/month</div>
+      </div>
+
+      <!-- New Categories -->
+      <div class="tool-card" data-category="productivity">
+        <div class="tool-header">
+          <div class="tool-icon">⚡</div>
+          <a href="https://grammarly.com" target="_blank" class="tool-name">Grammarly</a>
+        </div>
+        <div class="tool-description">AI writing assistant that checks grammar, spelling, and provides writing suggestions.</div>
+        <div class="tool-specialty">Writing enhancement</div>
+        <div class="tool-category">productivity</div>
+        <div class="pricing">Free tier available, Premium $12/month</div>
+      </div>
+
+      <div class="tool-card" data-category="productivity">
+        <div class="tool-header">
+          <div class="tool-icon">📧</div>
+          <a href="https://www.boomeranggmail.com" target="_blank" class="tool-name">Boomerang AI</a>
+        </div>
+        <div class="tool-description">AI email assistant that helps write better emails and manage inbox productivity.</div>
+        <div class="tool-specialty">Email optimization</div>
+        <div class="tool-category">productivity</div>
+        <div class="pricing">Free tier available, paid plans from $5/month</div>
+      </div>
+
+      <div class="tool-card" data-category="design">
+        <div class="tool-header">
+          <div class="tool-icon">🎯</div>
+          <a href="https://www.figma.com" target="_blank" class="tool-name">Figma AI</a>
+        </div>
+        <div class="tool-description">Design platform with AI-powered features for prototyping, design suggestions, and automation.</div>
+        <div class="tool-specialty">AI-assisted design</div>
+        <div class="tool-category">design</div>
+        <div class="pricing">Free tier available, paid plans from $12/month</div>
+      </div>
+
+      <div class="tool-card" data-category="data">
+        <div class="tool-header">
+          <div class="tool-icon">📊</div>
+          <a href="https://www.tableau.com" target="_blank" class="tool-name">Tableau AI</a>
+        </div>
+        <div class="tool-description">Data visualization platform with AI-powered insights and automated analytics.</div>
+        <div class="tool-specialty">Data visualization & analytics</div>
+        <div class="tool-category">data</div>
+        <div class="pricing">Starting at $70/month</div>
+      </div>
+
+      <div class="tool-card" data-category="data">
+        <div class="tool-header">
+          <div class="tool-icon">🧮</div>
+          <a href="https://www.julius.ai" target="_blank" class="tool-name">Julius AI</a>
+        </div>
+        <div class="tool-description">AI data analyst that helps analyze datasets, create visualizations, and generate insights.</div>
+        <div class="tool-specialty">Automated data analysis</div>
+        <div class="tool-category">data</div>
+        <div class="pricing">Free tier available, paid plans from $20/month</div>
+      </div>
+
+      <div class="tool-card" data-category="business">
+        <div class="tool-header">
+          <div class="tool-icon">💼</div>
+          <a href="https://www.salesforce.com/products/einstein/" target="_blank" class="tool-name">Salesforce Einstein</a>
+        </div>
+        <div class="tool-description">AI-powered CRM features including lead scoring, opportunity insights, and predictive analytics.</div>
+        <div class="tool-specialty">CRM intelligence</div>
+        <div class="tool-category">business</div>
+        <div class="pricing">Included with Salesforce plans</div>
+      </div>
+
+      <div class="tool-card" data-category="business">
+        <div class="tool-header">
+          <div class="tool-icon">📈</div>
+          <a href="https://www.hubspot.com/artificial-intelligence" target="_blank" class="tool-name">HubSpot AI</a>
+        </div>
+        <div class="tool-description">AI-powered marketing, sales, and service automation platform with content generation.</div>
+        <div class="tool-specialty">Marketing automation</div>
+        <div class="tool-category">business</div>
+        <div class="pricing">Free tier available, paid plans from $45/month</div>
+      </div>
+
+      <div class="tool-card" data-category="education">
+        <div class="tool-header">
+          <div class="tool-icon">🎓</div>
+          <a href="https://www.khanacademy.org" target="_blank" class="tool-name">Khan Academy AI</a>
+        </div>
+        <div class="tool-description">AI tutoring assistant that provides personalized learning experiences and educational support.</div>
+        <div class="tool-specialty">Personalized tutoring</div>
+        <div class="tool-category">education</div>
+        <div class="pricing">Free</div>
+      </div>
+
+      <div class="tool-card" data-category="education">
+        <div class="tool-header">
+          <div class="tool-icon">📚</div>
+          <a href="https://www.socratic.org" target="_blank" class="tool-name">Socratic by Google</a>
+        </div>
+        <div class="tool-description">AI homework helper that uses text and speech recognition to provide educational assistance.</div>
+        <div class="tool-specialty">Homework assistance</div>
+        <div class="tool-category">education</div>
+        <div class="pricing">Free</div>
+      </div>
+    </div>
+    
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-number">35+</div>
+        <div class="stat-label">AI Tools</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">12</div>
+        <div class="stat-label">Categories</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">2024</div>
+        <div class="stat-label">Updated</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Search functionality
+    const searchInput = document.getElementById('searchInput');
+    const toolsGrid = document.getElementById('toolsGrid');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const toolCards = document.querySelectorAll('.tool-card');
+
+    // Search function
+    searchInput.addEventListener('input', function() {
+      const searchTerm = this.value.toLowerCase();
+      
+      toolCards.forEach(card => {
+        const toolName = card.querySelector('.tool-name').textContent.toLowerCase();
+        const toolDescription = card.querySelector('.tool-description').textContent.toLowerCase();
+        const toolSpecialty = card.querySelector('.tool-specialty').textContent.toLowerCase();
+        
+        if (toolName.includes(searchTerm) || 
+            toolDescription.includes(searchTerm) || 
+            toolSpecialty.includes(searchTerm)) {
+          card.style.display = 'block';
+          card.classList.add('fade-in');
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+
+    // Category filter function
+    filterButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const category = this.getAttribute('data-category');
+        
+        // Update active button
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        this.classList.add('active');
+        
+        // Filter cards
+        toolCards.forEach(card => {
+          const cardCategory = card.getAttribute('data-category');
+          
+          if (category === 'all' || cardCategory === category) {
+            card.style.display = 'block';
+            card.classList.add('fade-in');
+          } else {
+            card.style.display = 'none';
+          }
+        });
+        
+        // Clear search when filtering
+        searchInput.value = '';
+      });
+    });
+
+    // Add hover effects and animations
+    toolCards.forEach(card => {
+      card.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-8px) scale(1.02)';
+      });
+      
+      card.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0) scale(1)';
+      });
+    });
+
+    // Initialize with fade-in animation
+    window.addEventListener('load', function() {
+      toolCards.forEach((card, index) => {
+        setTimeout(() => {
+          card.classList.add('fade-in');
+        }, index * 100);
+      });
+    });
+  </script>
+</body>
+</html>
